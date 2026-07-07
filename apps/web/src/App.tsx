@@ -1,19 +1,20 @@
-import { Button } from "@workspace/ui/components/button"
+import { Route, Routes } from "react-router"
+
+import { Layout } from "@/components/layout"
+import { EditorPage } from "@/pages/editor"
+import { LandingPage } from "@/pages/landing"
+import { SchemasPage } from "@/pages/schemas"
+import { TemplatesPage } from "@/pages/templates"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="text-muted-foreground font-mono text-xs">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<LandingPage />} />
+        <Route path="schemas" element={<SchemasPage />} />
+        <Route path="templates" element={<TemplatesPage />} />
+        <Route path="editor/:id?" element={<EditorPage />} />
+      </Route>
+    </Routes>
   )
 }

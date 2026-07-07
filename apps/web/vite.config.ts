@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // satteri ships a WASM/WASI build that esbuild pre-bundling breaks
+  optimizeDeps: {
+    exclude: ["satteri"],
+  },
+  server: {
+    proxy: {
+      "/api": "http://localhost:3000",
+    },
+  },
 })

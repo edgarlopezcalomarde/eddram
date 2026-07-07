@@ -1,9 +1,11 @@
 {
   "name": "@workspace/ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Componentes UI reutilizables basados en shadcn/ui para EDDRAM",
   "type": "module",
   "private": true,
   "author": "Edgar Lopez Calomarde",
+  "license": "MIT",
   "scripts": {
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",

@@ -1,8 +1,11 @@
 {
   "name": "@workspace/shared",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Tipos compartidos y motor ASCII para EDDRAM",
   "type": "module",
   "private": true,
+  "author": "Edgar Lopez Calomarde",
+  "license": "MIT",
   "scripts": {
     "test": "bun test",
     "format": "prettier --write \"**/*.ts\"",

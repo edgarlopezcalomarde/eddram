@@ -1,8 +1,10 @@
 {
   "name": "eddram",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Constructor visual de esquemas y diagramas ASCII. Monorepo root con server, web, shared y UI.",
   "private": true,
   "author": "Edgar Lopez Calomarde",
+  "license": "MIT",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -22,6 +24,7 @@
   },
   "packageManager": "bun@1.3.14",
   "engines": {
+    "bun": ">=1.2",
     "node": ">=20"
   },
   "workspaces": [

@@ -31,3 +31,7 @@ dist-ssr
 
 # typescript
 *.tsbuildinfo
+
+# EDDRAM local data
+.eddram/
+apps/server/data/

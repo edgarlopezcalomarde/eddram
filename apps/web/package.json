@@ -1,9 +1,11 @@
 {
-  "name": "web",
-  "version": "0.0.1",
+  "name": "@edgarlopezcalomarde/eddram-web",
+  "version": "0.1.0",
+  "description": "Frontend SPA de EDDRAM - Constructor visual de esquemas ASCII",
   "type": "module",
   "private": true,
   "author": "Edgar Lopez Calomarde",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

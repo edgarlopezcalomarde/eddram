@@ -1,8 +1,11 @@
 {
-  "name": "server",
+  "name": "@edgarlopezcalomarde/eddram",
   "version": "0.1.0",
+  "description": "Constructor visual de esquemas y diagramas ASCII. Instala el paquete y ejecuta `eddram` para abrirlo en tu navegador.",
   "type": "module",
   "private": true,
+  "author": "Edgar Lopez Calomarde",
+  "license": "MIT",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "start": "NODE_ENV=production bun run src/index.ts",

@@ -2,12 +2,17 @@
   "name": "eddram",
   "version": "0.0.1",
   "private": true,
+  "author": "Edgar Lopez Calomarde",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "turbo format",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "db:migrate": "bun run --cwd apps/server db:migrate",
+    "db:generate": "bun run --cwd apps/server db:generate",
+    "db:seed": "bun run --cwd apps/server db:seed"
   },
   "devDependencies": {
     "prettier": "^3.8.3",

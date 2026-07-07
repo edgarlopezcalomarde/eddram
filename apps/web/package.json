@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "author": "Edgar Lopez Calomarde",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -12,10 +13,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bruits/satteri-wasm32-wasi": "https://registry.npmjs.org/@bruits/satteri-wasm32-wasi/-/satteri-wasm32-wasi-0.9.4.tgz",
+    "@tanstack/react-query": "^5.101.2",
+    "@workspace/shared": "workspace:*",
     "@workspace/ui": "workspace:*",
+    "axios": "^1.18.1",
     "lucide-react": "^1.23.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-call": "^2.0.2",
+    "react-dom": "^19.2.6",
+    "react-hot-toast": "^2.6.0",
+    "react-router": "^8.1.0",
+    "satteri": "^0.9.4"
   },
   "devDependencies": {
     "@eslint/js": "^10",

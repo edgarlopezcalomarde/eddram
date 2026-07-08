@@ -1,14 +1,14 @@
-import { cors } from "@elysiajs/cors";
-import { staticPlugin } from "@elysiajs/static";
-import { Elysia } from "elysia";
-import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { cors } from "@elysiajs/cors"
+import { staticPlugin } from "@elysiajs/static"
+import { Elysia } from "elysia"
+import { existsSync } from "node:fs"
+import { resolve } from "node:path"
 
-import { runMigrations } from "./db/migrate";
-import { seedTemplates } from "./db/seed";
-import { HttpError } from "./http-error";
-import { schemasRoutes } from "./routes/schemas";
-import { templatesRoutes } from "./routes/templates";
+import { runMigrations } from "./db/migrate"
+import { seedTemplates } from "./db/seed"
+import { HttpError } from "./http-error"
+import { schemasRoutes } from "./routes/schemas"
+import { templatesRoutes } from "./routes/templates"
 
 /**
  * Boots the server. Wrapped in a function (rather than run at import time)
@@ -18,39 +18,41 @@ import { templatesRoutes } from "./routes/templates";
  * not safe once this file is bundled together with its caller.
  */
 export function startServer(): void {
-  const PORT = Number(process.env.PORT ?? 3000);
+  const PORT = Number(process.env.PORT ?? 3000)
 
   // migrations + template seeding are idempotent, run them on boot
-  runMigrations();
-  seedTemplates();
+  runMigrations()
+  seedTemplates()
 
   const app = new Elysia()
     .onError(({ error, code, set }) => {
       if (error instanceof HttpError) {
-        set.status = error.statusCode;
-        return { error: error.code, message: error.message };
+        set.status = error.statusCode
+        return { error: error.code, message: error.message }
       }
       if (code === "VALIDATION") {
-        set.status = 422;
+        set.status = 422
         // Elysia's ValidationError.message is a JSON dump; surface the summary
-        const summary = error.all?.[0];
+        const summary = error.all?.[0]
         return {
           error: "VALIDATION",
-          message: (summary && "summary" in summary && summary.summary) || "Datos inválidos",
-        };
+          message:
+            (summary && "summary" in summary && summary.summary) ||
+            "Datos inválidos",
+        }
       }
       if (code === "NOT_FOUND") {
-        set.status = 404;
-        return { error: "NOT_FOUND", message: "Ruta no encontrada" };
+        set.status = 404
+        return { error: "NOT_FOUND", message: "Ruta no encontrada" }
       }
-      console.error(error);
-      set.status = 500;
-      return { error: "INTERNAL", message: "Error interno del servidor" };
+      console.error(error)
+      set.status = 500
+      return { error: "INTERNAL", message: "Error interno del servidor" }
     })
     .use(cors())
     .get("/api/health", () => ({ ok: true }))
     .use(schemasRoutes)
-    .use(templatesRoutes);
+    .use(templatesRoutes)
 
   // When a built frontend is present (production/packaged runs; local dev
   // normally has no apps/web/dist), Elysia also serves it (SPA fallback
@@ -60,16 +62,26 @@ export function startServer(): void {
   // would never be observed here.
   const webDist = process.env.WEB_DIST_DIR
     ? resolve(process.env.WEB_DIST_DIR)
-    : resolve(import.meta.dir, "../../web/dist");
+    : resolve(import.meta.dir, "../../web/dist")
   if (existsSync(webDist)) {
     app
       .use(staticPlugin({ assets: webDist, prefix: "/", indexHTML: true }))
-      .get("*", () => Bun.file(resolve(webDist, "index.html")));
+      .get("*", ({ request }) => {
+        // SPA fallback: only serve index.html for navigation requests (paths
+        // without a file extension). Static assets under /assets/* must keep
+        // their real MIME type, otherwise browsers reject <script type="module">
+        // with a "Expected a JavaScript-or-Wasm module script" error.
+        const url = new URL(request.url)
+        if (url.pathname.includes(".")) {
+          return new Response("Not Found", { status: 404 })
+        }
+        return Bun.file(resolve(webDist, "index.html"))
+      })
   }
 
-  app.listen(PORT);
+  app.listen(PORT)
 
-  console.log(`EDDRAM server escuchando en http://localhost:${PORT}`);
+  console.log(`EDDRAM server escuchando en http://localhost:${PORT}`)
 }
 
-if (import.meta.main) startServer();
+if (import.meta.main) startServer()

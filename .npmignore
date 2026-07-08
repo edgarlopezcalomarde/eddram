@@ -1,0 +1,6 @@
+# Never publish anything from the monorepo root.
+# Only apps/server/dist/ is published (see its `files` field).
+*
+!apps/server/dist/
+apps/server/dist/.gitkeep
+*.tsbuildinfo

@@ -1,6 +1,6 @@
 {
   "name": "@edgarlopezcalomarde/eddram",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Constructor visual de esquemas y diagramas ASCII. Instala el paquete y ejecuta `eddram` para abrirlo en tu navegador.",
   "type": "module",
   "private": true,

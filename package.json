@@ -1,6 +1,6 @@
 {
   "name": "eddram",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Constructor visual de esquemas y diagramas ASCII. Monorepo root con server, web, shared y UI.",
   "private": false,
   "author": "Edgar Lopez Calomarde",
